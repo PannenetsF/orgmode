@@ -252,7 +252,7 @@ function Url:_parse_path_type()
     or (first_char == '~' and self.path:sub(2, 2) == '/')
   then
     self.path_type = 'file'
-    self.realpath = fs.get_real_path(self.path, true) or self.path
+    self.realpath = fs.get_real_path(self.path) or self.path
     return
   end
 
