@@ -21,7 +21,7 @@ function M.substitute_path(path_str)
 end
 
 ---@param filepath string
-function M.get_real_path(filepath)
+function M.get_real_path(filepath, match)
   if not filepath then
     return false
   end
@@ -30,6 +30,12 @@ function M.get_real_path(filepath)
     return false
   end
   local real = vim.loop.fs_realpath(substituted)
+  if match then
+    -- if path ends with / , real needs too
+    if filepath:sub(-1, -1) == '/' then
+      real = real .. '/'
+    end
+  end
   return real or false
 end
 
